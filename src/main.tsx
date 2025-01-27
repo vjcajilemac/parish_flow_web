@@ -1,10 +1,10 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import AppRouter from "./route/AppRoutes.tsx"; // Cambia esta línea a tu ruta de AppRouter
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <AppRouter /> {/* Usa AppRouter de react-router-dom */}
+  </StrictMode>
+);
