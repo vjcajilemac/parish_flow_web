@@ -8,13 +8,13 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Redirige según la autenticación */}
-        {isAuthenticated ? (
+        {/* Redirige según la autenticación 
+        {isAuthenticated ? (*/}
           <Route path="/*" element={<InternalRoutes/>} />
-        ) : (
-          <Route path="/*" element={<AuthRoutes/>} />
-        )}
-        {/* Redirigir a una ruta específica si no coincide ninguna */}
+        {/*) : (*/}
+          <Route path="/auth/*" element={<AuthRoutes/>} />
+        {/*)}
+         Redirigir a una ruta específica si no coincide ninguna */}
         <Route path="*" element={<Navigate to={isAuthenticated ? "/home" : "/login"} />} />
       </Routes>
     </BrowserRouter>
