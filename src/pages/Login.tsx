@@ -1,9 +1,10 @@
 import "@/css/AuthCss.css";
 import churchImage from "@/assets/images/church.png";
-import { useState, ChangeEvent, Fragment } from "react";
+import { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { login, logout } from "@/redux/features/auth/authSlice";
+import { useAppDispatch/*, useAppSelector*/ } from "@/redux/hooks/hooks";
+//import { login } from "@/redux/features/auth/authSlice";
+import { signIn } from "@/redux/features/auth";
 
 const Login: React.FC = () => {
   const [state, setState] = useState({
@@ -12,7 +13,7 @@ const Login: React.FC = () => {
   });
 
   const dispatch = useAppDispatch();
-  const auth = useAppSelector((state) => state.auth);
+  //const auth = useAppSelector((state) => state.auth);
 
   const navigate = useNavigate(); // Hook para redirigir
 
@@ -26,31 +27,20 @@ const Login: React.FC = () => {
     event.preventDefault();
 
     if (email.trim() && password.trim()) {
-      const user = {email,
-        password
-      };
-      dispatch(login(user));
-      //navigate("/home"); // Redirige al home
+      const user = { email, password };
+      //dispatch(login(user));
+      //dispatch(login(user));
+      dispatch(signIn(user));
+      navigate("/home"); // Redirige al home
     } else {
       alert("Por favor, completa los campos.");
     }
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
-  };
-
   return (
     <div className="min-h-screen min-w-screen bg-red-100 grid grid-cols-2">
-      {auth.isAuthenticated ? (
-        <div>
-          <h2>Bienvenido, {auth.user?.email}!</h2>
-          <button onClick={handleLogout}>Cerrar Sesión</button>
-        </div>
-      ) : (
-        <Fragment>
-{/* Sección de la Imagen */}
-<div
+      {/* Sección de la Imagen */}
+      <div
         className="h-screen w-full bg-cover bg-center"
         style={{ backgroundImage: `url(${churchImage})` }}
       >
@@ -112,10 +102,6 @@ const Login: React.FC = () => {
           </p>
         </div>
       </div>
-        </Fragment>
-        
-      )}
-      
     </div>
   );
 };
